@@ -1,10 +1,18 @@
-import hashlib, sqlite3, os
+import hashlib, sqlite3, os, atexit
 
 DB_PATH = '.state/db.sqlite3'
 os.makedirs('.state', exist_ok=True)
 conn = sqlite3.connect(DB_PATH)
 conn.execute('create table if not exists hashes (h text primary key)')
 conn.commit()
+
+def cleanup_db():
+    """Clean up database connection on exit"""
+    if conn:
+        conn.close()
+
+# Register cleanup function to run on exit
+atexit.register(cleanup_db)
 
 def seen_before(h):
     cur = conn.execute('select 1 from hashes where h=?', (h,))

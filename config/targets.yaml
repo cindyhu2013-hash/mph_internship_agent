@@ -1,0 +1,11 @@
+# Example seed employers and their ATS type
+# Add as many as you like
+- org: Boston Medical Center
+  ats: workday
+  endpoint: https://bmc.wd1.myworkdayjobs.com/wday/cxs/bmc/External/jobs
+- org: Dana‑Farber Cancer Institute
+  ats: greenhouse
+  board: https://boards.greenhouse.io/danafarber
+- org: Mass General Brigham
+  ats: workday
+  endpoint: https://massgeneralbrigham.wd5.myworkdayjobs.com/wday/cxs/massgeneralbrigham/Careers/jobs

@@ -1,0 +1,32 @@
+keywords:
+  - MPH
+  - public health
+  - health policy
+  - health management
+  - population health
+  - epidemiology
+exclude:
+  - veterinary
+  - dental
+  - receptionist
+  - high school
+  - volunteer
+preferred_states:
+  - NY
+  - NJ
+  - RI
+  - CT
+  - MA
+  - CA
+  - VT
+  - BC
+  - ON
+paid_only: false
+score_weights:
+  location_match: 35
+  term_match: 30
+  paid: 25
+  sector_match: 15
+  target_org: 10
+  negative_term: -20
+  negative_keyword: -15

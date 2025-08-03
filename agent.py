@@ -1,9 +1,10 @@
-import os, yaml, requests, datetime, argparse, sys
+import os, yaml, requests, datetime, argparse, sys, time, signal
 from dotenv import load_dotenv
 from discovery_module import discover_urls
 from utils.dedupe import hash_job, seen_before, remember
 from utils.scoring import score
 from ats_connectors import parse_greenhouse, parse_lever, parse_workday, parse_brassring, parse_neogov
+from ats_connectors.general_parser import parse_general_job_board
 
 load_dotenv()
 
@@ -12,6 +13,17 @@ SERP_API_KEY = os.getenv('SERP_API_KEY')
 
 with open('config/rules.yaml') as f:
     RULES = yaml.safe_load(f)
+
+# Global timeout settings
+URL_TIMEOUT = 30  # seconds per URL
+PARSER_TIMEOUT = 60  # seconds per parser
+TOTAL_TIMEOUT = 600  # 10 minutes total
+
+class TimeoutError(Exception):
+    pass
+
+def timeout_handler(signum, frame):
+    raise TimeoutError("Operation timed out")
 
 def validate_job(job):
     """Validate job data structure and required fields"""
@@ -62,37 +74,80 @@ def create_test_job():
     }
 
 def router(url):
-    if 'greenhouse.io' in url:
-        return parse_greenhouse(url)
-    if 'lever.co' in url:
-        return parse_lever(url)
-    if 'workdayjobs' in url or '/wday/cxs/' in url:
-        return parse_workday(url)
-    if 'brassring.com' in url:
-        return parse_brassring(url)
-    if 'governmentjobs.com' in url:
-        return parse_neogov(url)
-    return []
+    """Route URL to appropriate parser with timeout handling"""
+    start_time = time.time()
+    
+    try:
+        # Set timeout for the entire router function
+        signal.signal(signal.SIGALRM, timeout_handler)
+        signal.alarm(PARSER_TIMEOUT)
+        
+        print(f"  [ROUTER] Starting to process: {url}")
+        
+        # Try specific ATS parsers first
+        if 'greenhouse.io' in url:
+            result = parse_greenhouse(url)
+        elif 'lever.co' in url:
+            result = parse_lever(url)
+        elif 'workdayjobs' in url or '/wday/cxs/' in url:
+            result = parse_workday(url)
+        elif 'brassring.com' in url:
+            result = parse_brassring(url)
+        elif 'governmentjobs.com' in url:
+            result = parse_neogov(url)
+        else:
+            # Use general parser for job boards
+            result = parse_general_job_board(url)
+        
+        elapsed = time.time() - start_time
+        print(f"  [ROUTER] Completed in {elapsed:.2f}s: {len(result)} jobs found")
+        
+        signal.alarm(0)  # Cancel the alarm
+        return result
+        
+    except TimeoutError:
+        elapsed = time.time() - start_time
+        print(f"  [TIMEOUT] Router timed out after {elapsed:.2f}s for: {url}")
+        return []
+    except Exception as e:
+        elapsed = time.time() - start_time
+        print(f"  [ERROR] Router failed after {elapsed:.2f}s for {url}: {e}")
+        return []
+    finally:
+        signal.alarm(0)  # Ensure alarm is cancelled
 
 def post_to_sheet(job):
-    """Post job to sheet with error handling"""
+    """Post job to sheet with error handling and timeout"""
+    start_time = time.time()
+    
     try:
         resp = requests.post(SHEET_ENDPOINT, json=job, timeout=20)
         resp.raise_for_status()
-        print(f"SUCCESS: Posted job '{job['title']}' to sheet")
+        elapsed = time.time() - start_time
+        print(f"SUCCESS: Posted job '{job['title']}' to sheet in {elapsed:.2f}s")
         return True
+    except requests.exceptions.Timeout:
+        elapsed = time.time() - start_time
+        print(f"TIMEOUT: Sheet posting timed out after {elapsed:.2f}s for '{job.get('title', 'Unknown')}'")
+        return False
     except requests.exceptions.RequestException as e:
-        print(f"ERROR: Failed to post job '{job.get('title', 'Unknown')}' to sheet: {e}")
+        elapsed = time.time() - start_time
+        print(f"ERROR: Failed to post job '{job.get('title', 'Unknown')}' to sheet after {elapsed:.2f}s: {e}")
         return False
     except Exception as e:
-        print(f"ERROR: Unexpected error posting job '{job.get('title', 'Unknown')}': {e}")
+        elapsed = time.time() - start_time
+        print(f"ERROR: Unexpected error posting job '{job.get('title', 'Unknown')}' after {elapsed:.2f}s: {e}")
         return False
 
 def main():
     parser = argparse.ArgumentParser(description='MPH Internship Agent')
     parser.add_argument('--test', action='store_true', help='Run in test mode - add test job to sheet')
     parser.add_argument('--validate-only', action='store_true', help='Only validate existing jobs, don\'t post')
+    parser.add_argument('--timeout', type=int, default=TOTAL_TIMEOUT, help=f'Total timeout in seconds (default: {TOTAL_TIMEOUT})')
     args = parser.parse_args()
+    
+    # Set up total timeout
+    total_start_time = time.time()
     
     if args.test:
         print("TEST MODE: Adding test job to sheet...")
@@ -114,18 +169,51 @@ def main():
         print("ERROR: SERP_API_KEY environment variable not set")
         sys.exit(1)
     
-    print("Starting job discovery and processing...")
-    urls = discover_urls(RULES, SERP_API_KEY)
-    print(f"Discovered {len(urls)} URLs to process")
+    print(f"Starting job discovery and processing (timeout: {args.timeout}s)...")
+    
+    # Discovery phase with timeout
+    try:
+        signal.signal(signal.SIGALRM, timeout_handler)
+        signal.alarm(120)  # 2 minutes for discovery
+        urls = discover_urls(RULES, SERP_API_KEY)
+        signal.alarm(0)
+        print(f"Discovered {len(urls)} URLs to process")
+    except TimeoutError:
+        print("TIMEOUT: Discovery phase timed out")
+        return
+    except Exception as e:
+        print(f"ERROR: Discovery failed: {e}")
+        return
     
     processed_count = 0
     posted_count = 0
     validation_failures = 0
+    timeout_count = 0
+    error_count = 0
     
-    for url in urls:
+    print(f"Processing {len(urls)} URLs...")
+    
+    for i, url in enumerate(urls, 1):
+        # Check total timeout
+        elapsed_total = time.time() - total_start_time
+        if elapsed_total > args.timeout:
+            print(f"TIMEOUT: Total time limit reached ({elapsed_total:.2f}s), stopping")
+            break
+        
+        print(f"\n[{i}/{len(urls)}] Processing: {url}")
+        url_start_time = time.time()
+        
         try:
+            # Set timeout for individual URL processing
+            signal.signal(signal.SIGALRM, timeout_handler)
+            signal.alarm(URL_TIMEOUT)
+            
             jobs = router(url)
-            print(f"Processing {len(jobs)} jobs from {url}")
+            
+            signal.alarm(0)  # Cancel alarm
+            
+            url_elapsed = time.time() - url_start_time
+            print(f"  [URL] Completed in {url_elapsed:.2f}s: {len(jobs)} jobs found")
             
             for job in jobs:
                 processed_count += 1
@@ -158,15 +246,32 @@ def main():
                     else:
                         print(f"FAILED: Could not post job '{job['title']}'")
                         
+        except TimeoutError:
+            url_elapsed = time.time() - url_start_time
+            print(f"  [TIMEOUT] URL timed out after {url_elapsed:.2f}s: {url}")
+            timeout_count += 1
+            signal.alarm(0)  # Ensure alarm is cancelled
+            continue
         except Exception as e:
-            print(f"ERROR: Failed to process URL {url}: {e}")
+            url_elapsed = time.time() - url_start_time
+            print(f"  [ERROR] Failed to process URL after {url_elapsed:.2f}s: {url} - {e}")
+            error_count += 1
+            signal.alarm(0)  # Ensure alarm is cancelled
             continue
     
-    print(f"\nSUMMARY:")
-    print(f"  Processed: {processed_count} jobs")
-    print(f"  Posted: {posted_count} jobs")
-    print(f"  Validation failures: {validation_failures}")
+    total_elapsed = time.time() - total_start_time
+    
+    print(f"\n{'='*50}")
+    print(f"SUMMARY:")
+    print(f"  Total time: {total_elapsed:.2f}s")
     print(f"  URLs processed: {len(urls)}")
+    print(f"  Jobs processed: {processed_count}")
+    print(f"  Jobs posted: {posted_count}")
+    print(f"  Validation failures: {validation_failures}")
+    print(f"  Timeouts: {timeout_count}")
+    print(f"  Errors: {error_count}")
+    print(f"  Average time per URL: {total_elapsed/len(urls):.2f}s")
+    print(f"{'='*50}")
 
 if __name__ == '__main__':
     main()

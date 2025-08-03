@@ -1,11 +1,356 @@
-# Example seed employers and their ATS type
-# Add as many as you like
-- org: Boston Medical Center
+# Major Health Organizations and Institutions
+- org: Centers for Disease Control and Prevention
   ats: workday
-  endpoint: https://bmc.wd1.myworkdayjobs.com/wday/cxs/bmc/External/jobs
-- org: Dana‑Farber Cancer Institute
-  ats: greenhouse
-  board: https://boards.greenhouse.io/danafarber
+  endpoint: https://jobs.cdc.gov/
+  search_terms: ["MPH", "public health", "epidemiology", "biostatistics"]
+
+- org: National Institutes of Health
+  ats: workday
+  endpoint: https://jobs.nih.gov/
+  search_terms: ["MPH", "public health", "health policy", "biostatistics"]
+
+- org: World Health Organization
+  ats: workday
+  endpoint: https://careers.who.int/
+  search_terms: ["MPH", "public health", "global health", "health policy"]
+
+- org: Food and Drug Administration
+  ats: workday
+  endpoint: https://www.fda.gov/about-fda/working-fda/jobs-fda
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Environmental Protection Agency
+  ats: workday
+  endpoint: https://www.epa.gov/careers
+  search_terms: ["MPH", "public health", "environmental health", "health policy"]
+
+# Major Universities and Research Institutions
+- org: Johns Hopkins University
+  ats: workday
+  endpoint: https://jobs.jhu.edu/
+  search_terms: ["MPH", "public health", "epidemiology", "biostatistics"]
+
+- org: Harvard University
+  ats: workday
+  endpoint: https://jobs.brassring.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25240&siteid=5341&PageType=JobDetails&jobid=1981114
+  search_terms: ["MPH", "public health", "health policy", "global health"]
+
+- org: Yale University
+  ats: workday
+  endpoint: https://your.yale.edu/work-yale/careers
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Columbia University
+  ats: workday
+  endpoint: https://opportunities.columbia.edu/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: University of Michigan
+  ats: workday
+  endpoint: https://careers.umich.edu/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: University of California
+  ats: workday
+  endpoint: https://jobs.ucop.edu/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: UCLA
+  ats: workday
+  endpoint: https://hr.mycareer.ucla.edu/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: UC Berkeley
+  ats: workday
+  endpoint: https://jobs.berkeley.edu/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Stanford University
+  ats: workday
+  endpoint: https://careersearch.stanford.edu/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Boston University
+  ats: workday
+  endpoint: https://bu.silkroad.com/epostings/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Tufts University
+  ats: workday
+  endpoint: https://tufts.taleo.net/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Emory University
+  ats: workday
+  endpoint: https://hr.emory.edu/careers/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: University of North Carolina
+  ats: workday
+  endpoint: https://unc.peopleadmin.com/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: University of Washington
+  ats: workday
+  endpoint: https://hr.uw.edu/jobs/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: University of Minnesota
+  ats: workday
+  endpoint: https://humanresources.umn.edu/jobs
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: University of Pittsburgh
+  ats: workday
+  endpoint: https://www.pittsource.com/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Duke University
+  ats: workday
+  endpoint: https://careers.duke.edu/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Vanderbilt University
+  ats: workday
+  endpoint: https://www.vanderbilt.edu/work-at-vanderbilt/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+# Major Healthcare Systems
+- org: Mayo Clinic
+  ats: workday
+  endpoint: https://jobs.mayoclinic.org/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Cleveland Clinic
+  ats: workday
+  endpoint: https://my.clevelandclinic.org/careers
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Kaiser Permanente
+  ats: workday
+  endpoint: https://www.kaiserpermanentejobs.org/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
 - org: Mass General Brigham
   ats: workday
   endpoint: https://massgeneralbrigham.wd5.myworkdayjobs.com/wday/cxs/massgeneralbrigham/Careers/jobs
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Boston Medical Center
+  ats: workday
+  endpoint: https://bmc.wd1.myworkdayjobs.com/wday/cxs/bmc/External/jobs
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Dana-Farber Cancer Institute
+  ats: greenhouse
+  board: https://boards.greenhouse.io/danafarber
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+# Health Insurance Companies
+- org: Blue Cross Blue Shield
+  ats: workday
+  endpoint: https://www.bcbs.com/careers
+  search_terms: ["MPH", "public health", "health policy", "health management"]
+
+- org: Aetna
+  ats: workday
+  endpoint: https://jobs.cvshealth.com/
+  search_terms: ["MPH", "public health", "health policy", "health management"]
+
+- org: Cigna
+  ats: workday
+  endpoint: https://jobs.cigna.com/
+  search_terms: ["MPH", "public health", "health policy", "health management"]
+
+- org: UnitedHealth Group
+  ats: workday
+  endpoint: https://careers.unitedhealthgroup.com/
+  search_terms: ["MPH", "public health", "health policy", "health management"]
+
+# Pharmaceutical Companies
+- org: Pfizer
+  ats: workday
+  endpoint: https://www.pfizer.com/careers
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Johnson & Johnson
+  ats: workday
+  endpoint: https://jobs.jnj.com/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Merck
+  ats: workday
+  endpoint: https://jobs.merck.com/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Novartis
+  ats: workday
+  endpoint: https://www.novartis.com/careers
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Roche
+  ats: workday
+  endpoint: https://careers.roche.com/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: GlaxoSmithKline
+  ats: workday
+  endpoint: https://careers.gsk.com/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: AstraZeneca
+  ats: workday
+  endpoint: https://careers.astrazeneca.com/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Bristol-Myers Squibb
+  ats: workday
+  endpoint: https://careers.bms.com/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Eli Lilly
+  ats: workday
+  endpoint: https://careers.lilly.com/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Amgen
+  ats: workday
+  endpoint: https://careers.amgen.com/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Gilead
+  ats: workday
+  endpoint: https://gilead.wd1.myworkdayjobs.com/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Biogen
+  ats: workday
+  endpoint: https://careers.biogen.com/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Regeneron
+  ats: workday
+  endpoint: https://careers.regeneron.com/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Moderna
+  ats: workday
+  endpoint: https://moderna.wd1.myworkdayjobs.com/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: BioNTech
+  ats: workday
+  endpoint: https://biontech.de/careers
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+# Government Agencies
+- org: Department of Health and Human Services
+  ats: workday
+  endpoint: https://www.usajobs.gov/Search/Results?d=DH
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Department of Veterans Affairs
+  ats: workday
+  endpoint: https://www.usajobs.gov/Search/Results?d=VA
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Department of Defense
+  ats: workday
+  endpoint: https://www.usajobs.gov/Search/Results?d=DD
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+# Non-Profit Organizations
+- org: American Public Health Association
+  ats: workday
+  endpoint: https://careers.apha.org/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: American Cancer Society
+  ats: workday
+  endpoint: https://www.cancer.org/about-us/careers.html
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: American Heart Association
+  ats: workday
+  endpoint: https://careers.heart.org/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: American Red Cross
+  ats: workday
+  endpoint: https://www.redcross.org/about-us/careers.html
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: PATH
+  ats: workday
+  endpoint: https://path.org/careers/
+  search_terms: ["MPH", "public health", "health policy", "global health"]
+
+- org: Population Services International
+  ats: workday
+  endpoint: https://www.psi.org/careers/
+  search_terms: ["MPH", "public health", "health policy", "global health"]
+
+- org: FHI 360
+  ats: workday
+  endpoint: https://www.fhi360.org/careers
+  search_terms: ["MPH", "public health", "health policy", "global health"]
+
+- org: RTI International
+  ats: workday
+  endpoint: https://www.rti.org/careers
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Abt Associates
+  ats: workday
+  endpoint: https://www.abtassociates.com/careers
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: ICF
+  ats: workday
+  endpoint: https://www.icf.com/careers
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Mathematica
+  ats: workday
+  endpoint: https://www.mathematica.org/careers
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: NORC at the University of Chicago
+  ats: workday
+  endpoint: https://www.norc.org/AboutUs/Pages/careers.aspx
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Westat
+  ats: workday
+  endpoint: https://www.westat.com/careers
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Battelle
+  ats: workday
+  endpoint: https://www.battelle.org/careers
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Booz Allen Hamilton
+  ats: workday
+  endpoint: https://careers.boozallen.com/
+  search_terms: ["MPH", "public health", "health policy", "epidemiology"]
+
+- org: Deloitte
+  ats: workday
+  endpoint: https://www2.deloitte.com/us/en/careers.html
+  search_terms: ["MPH", "public health", "health policy", "health management"]
+
+- org: McKinsey & Company
+  ats: workday
+  endpoint: https://www.mckinsey.com/careers
+  search_terms: ["MPH", "public health", "health policy", "health management"]
+
+- org: Boston Consulting Group
+  ats: workday
+  endpoint: https://careers.bcg.com/
+  search_terms: ["MPH", "public health", "health policy", "health management"]
+
+- org: Bain & Company
+  ats: workday
+  endpoint: https://www.bain.com/careers/
+  search_terms: ["MPH", "public health", "health policy", "health management"]

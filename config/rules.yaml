@@ -5,12 +5,78 @@ keywords:
   - health management
   - population health
   - epidemiology
+  - biostatistics
+  - health economics
+  - global health
+  - environmental health
+  - health promotion
+  - health education
+  - community health
+  - health administration
+  - health informatics
+  - health services research
+  - health equity
+  - health disparities
+  - health systems
+  - health care management
+
+search_terms:
+  - "MPH internship"
+  - "public health internship"
+  - "health policy internship"
+  - "epidemiology internship"
+  - "biostatistics internship"
+  - "health management internship"
+  - "population health internship"
+  - "health economics internship"
+  - "global health internship"
+  - "environmental health internship"
+  - "health promotion internship"
+  - "health education internship"
+  - "community health internship"
+  - "health administration internship"
+  - "health informatics internship"
+  - "health services research internship"
+  - "health equity internship"
+  - "health disparities internship"
+  - "health systems internship"
+  - "health care management internship"
+  - "public health summer internship"
+  - "MPH summer internship"
+  - "health policy summer internship"
+  - "epidemiology summer internship"
+  - "biostatistics summer internship"
+  - "health management summer internship"
+  - "population health summer internship"
+  - "health economics summer internship"
+  - "global health summer internship"
+  - "environmental health summer internship"
+  - "health promotion summer internship"
+  - "health education summer internship"
+  - "community health summer internship"
+  - "health administration summer internship"
+  - "health informatics summer internship"
+  - "health services research summer internship"
+  - "health equity summer internship"
+  - "health disparities summer internship"
+  - "health systems summer internship"
+  - "health care management summer internship"
+
 exclude:
   - veterinary
   - dental
   - receptionist
   - high school
   - volunteer
+  - unpaid
+  - "no compensation"
+  - "unpaid internship"
+  - "volunteer position"
+  - "high school student"
+  - "undergraduate only"
+  - "bachelor's only"
+  - "no graduate students"
+
 preferred_states:
   - NY
   - NJ
@@ -21,6 +87,107 @@ preferred_states:
   - VT
   - BC
   - ON
+  - DC
+  - MD
+  - VA
+  - PA
+  - IL
+  - MI
+  - OH
+  - TX
+  - FL
+  - WA
+  - OR
+
+preferred_organizations:
+  - "Centers for Disease Control"
+  - "CDC"
+  - "World Health Organization"
+  - "WHO"
+  - "National Institutes of Health"
+  - "NIH"
+  - "Department of Health and Human Services"
+  - "HHS"
+  - "Food and Drug Administration"
+  - "FDA"
+  - "Environmental Protection Agency"
+  - "EPA"
+  - "American Public Health Association"
+  - "APHA"
+  - "Johns Hopkins"
+  - "Harvard"
+  - "Yale"
+  - "Columbia"
+  - "University of Michigan"
+  - "University of California"
+  - "UCLA"
+  - "UC Berkeley"
+  - "Stanford"
+  - "Boston University"
+  - "Tufts"
+  - "Emory"
+  - "University of North Carolina"
+  - "UNC"
+  - "University of Washington"
+  - "UW"
+  - "University of Minnesota"
+  - "University of Pittsburgh"
+  - "Duke"
+  - "Vanderbilt"
+  - "Mayo Clinic"
+  - "Cleveland Clinic"
+  - "Kaiser Permanente"
+  - "Blue Cross Blue Shield"
+  - "Aetna"
+  - "Cigna"
+  - "UnitedHealth Group"
+  - "Pfizer"
+  - "Johnson & Johnson"
+  - "Merck"
+  - "Novartis"
+  - "Roche"
+  - "GlaxoSmithKline"
+  - "GSK"
+  - "AstraZeneca"
+  - "Bristol-Myers Squibb"
+  - "BMS"
+  - "Eli Lilly"
+  - "Amgen"
+  - "Gilead"
+  - "Biogen"
+  - "Regeneron"
+  - "Moderna"
+  - "BioNTech"
+  - "Janssen"
+  - "Sanofi"
+  - "Takeda"
+  - "AbbVie"
+  - "Boehringer Ingelheim"
+  - "Bayer"
+  - "Roche"
+  - "Novartis"
+  - "AstraZeneca"
+  - "Pfizer"
+  - "Johnson & Johnson"
+  - "Merck"
+  - "GlaxoSmithKline"
+  - "GSK"
+  - "Bristol-Myers Squibb"
+  - "BMS"
+  - "Eli Lilly"
+  - "Amgen"
+  - "Gilead"
+  - "Biogen"
+  - "Regeneron"
+  - "Moderna"
+  - "BioNTech"
+  - "Janssen"
+  - "Sanofi"
+  - "Takeda"
+  - "AbbVie"
+  - "Boehringer Ingelheim"
+  - "Bayer"
+
 paid_only: false
 score_weights:
   location_match: 35
@@ -30,3 +197,4 @@ score_weights:
   target_org: 10
   negative_term: -20
   negative_keyword: -15
+  preferred_org_match: 20

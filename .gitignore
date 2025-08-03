@@ -1,0 +1,25 @@
+# ---- Python virtual environments ----
+.venv/
+env/
+venv/
+
+# ---- Secrets & configuration ----
+.env
+
+# ---- Runtime state / caches ----
+.state/
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# ---- IDE & editor folders ----
+.vscode/
+.idea/
+
+# ---- OS junk ----
+.DS_Store
+Thumbs.db
+
+# ---- Logs ----
+*.log
+

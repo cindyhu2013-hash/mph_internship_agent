@@ -1,0 +1,37 @@
+name: Scheduled Agent Run
+
+on:
+  schedule:
+    # Run every day at 9 AM UTC
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Run agent
+      run: |
+        python agent.py
+      env:
+        SERP_API_KEY: ${{ secrets.SERP_API_KEY }}
+        SHEET_ENDPOINT: ${{ secrets.SHEET_ENDPOINT }}
+    
+    - name: Notify on failure
+      if: failure()
+      run: |
+        echo "Agent run failed - check the logs for details"
+        # You could add notification logic here (email, Slack, etc.) 

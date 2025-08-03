@@ -159,7 +159,7 @@ def discover_urls(rules, serp_api_key):
                 filtered_urls.append(url)
         elif any(domain in url.lower() for domain in ['indeed.com', 'linkedin.com', 'glassdoor.com', 'usajobs.gov', 'governmentjobs.com', 'ziprecruiter.com', 'simplyhired.com', 'careerbuilder.com']):
             filtered_urls.append(url)
-        elif any(org.lower() in url.lower() for org in rules.get('preferred_organizations', [])):
+        elif any(org.lower() in url.lower() for org in rules.get('preferred_organizations', []) if isinstance(org, str)):
             filtered_urls.append(url)
     
     print(f"Discovered {len(urls)} total URLs, filtered to {len(filtered_urls)} job-related URLs")

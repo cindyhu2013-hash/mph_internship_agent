@@ -309,7 +309,7 @@ def extract_job_from_linkedin_card(card, base_url):
             company = 'Unknown Organization'
         
         if title and job_url:
-            return {
+            job_data = {
                 'title': title,
                 'organization': company,
                 'location': location,
@@ -317,6 +317,8 @@ def extract_job_from_linkedin_card(card, base_url):
                 'description': '',
                 'ats_type': 'linkedin'
             }
+            
+            return job_data
     except Exception as e:
         print(f"    [GENERAL] Error extracting LinkedIn job: {e}")
     
